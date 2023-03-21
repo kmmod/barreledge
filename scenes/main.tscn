@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cygxcbu03jdrn"]
+[gd_scene load_steps=8 format=3 uid="uid://cygxcbu03jdrn"]
 
 [ext_resource type="PackedScene" uid="uid://cvpd1t64jdavb" path="res://components/player.tscn" id="1_2m6ca"]
 [ext_resource type="Texture2D" uid="uid://gwmf5ged1plt" path="res://assets/stone_floor_01-1.png" id="2_pmhxf"]
@@ -8,11 +8,15 @@ size = Vector3(32, 2.08165e-12, 32)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eiho7"]
 albedo_texture = ExtResource("2_pmhxf")
-uv1_scale = Vector3(8, 8, 8)
+uv1_scale = Vector3(16, 16, 16)
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_iyr8l"]
 size = Vector2(32, 32)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dbln8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gqddd"]
 
 [node name="main" type="Node3D"]
 
@@ -28,3 +32,25 @@ shape = SubResource("BoxShape3D_u6a8w")
 material_override = SubResource("StandardMaterial3D_eiho7")
 mesh = SubResource("PlaneMesh_iyr8l")
 skeleton = NodePath("../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.887526, -0.267792, 0.374946, 1.80761e-16, 0.813761, 0.5812, -0.460758, 0.51583, -0.722234, 0, 5.92227, -5.57718)
+shadow_enabled = true
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.142, 0.5, -2.662)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_dbln8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+mesh = SubResource("BoxMesh_gqddd")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 4.5437, 0.5, -2.20144)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+shape = SubResource("BoxShape3D_dbln8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3"]
+mesh = SubResource("BoxMesh_gqddd")
