@@ -23,6 +23,7 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
@@ -39,9 +40,9 @@ func _input(event):
 
 
 func handle_mouse_input(mouse_delta):
-		var mouse_x = -mouse_delta.x * SENSITIVITY
-		var mouse_y = -mouse_delta.y * SENSITIVITY
+	var mouse_x = -mouse_delta.x * SENSITIVITY
+	var mouse_y = -mouse_delta.y * SENSITIVITY
 
-		camera.rotate_x(mouse_y)
-		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
-		self.rotate_y(mouse_x)
+	camera.rotate_x(mouse_y)
+	camera.rotation.x = clamp(camera.rotation.x, -PI / 2, PI / 2)
+	self.rotate_y(mouse_x)
