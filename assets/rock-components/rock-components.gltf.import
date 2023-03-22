@@ -1,0 +1,111 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://cjryr27h2pmxv"
+path="res://.godot/imported/rock-components.gltf-8730832278228f495c2c99b7936b1346.scn"
+
+[deps]
+
+source_file="res://assets/rock-components/rock-components.gltf"
+dest_files=["res://.godot/imported/rock-components.gltf-8730832278228f495c2c99b7936b1346.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=0.031
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:rock-component-01-L-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-01-M-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-01-S-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-02-L-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-02-M-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-02-S-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-03-L-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-03-M-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-03-S-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-04-L-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-04-M-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-04-S": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-05-L-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-05-M-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-05-S-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-06-M-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-06-MA-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-06-S-": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:rock-component-06-SA": {
+"generate/physics": true,
+"physics/shape_type": 1
+}
+}
+}
+gltf/embedded_image_handling=1
