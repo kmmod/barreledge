@@ -46,3 +46,7 @@ func handle_mouse_input(mouse_delta):
 	camera.rotate_x(mouse_y)
 	camera.rotation.x = clamp(camera.rotation.x, -PI / 2, PI / 2)
 	self.rotate_y(mouse_x)
+
+
+func take_damage(damage: float) -> void:
+	print("OUCH: ", damage)

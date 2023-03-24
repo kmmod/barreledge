@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvpd1t64jdavb"]
+[gd_scene load_steps=4 format=3 uid="uid://cvpd1t64jdavb"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_cg5x7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e2w4w"]
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cncit"]
+radius = 0.3
 height = 1.8
 
 [node name="Player" type="CharacterBody3D"]
@@ -16,3 +20,7 @@ shape = SubResource("CapsuleShape3D_e2w4w")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28292, 0)
 current = true
 fov = 80.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.9, 2.08165e-12)
+mesh = SubResource("CapsuleMesh_cncit")
