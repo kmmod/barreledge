@@ -11,18 +11,17 @@ extends CharacterBody3D
 
 var player = null
 
-
 var attack_timer = 0.0
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 enum State {
-  IDLE,
-  ATTACK,
-  DEAD,
-  CHASE,
-  PATROL,
-  RUN,
+	IDLE,
+	ATTACK,
+	DEAD,
+	CHASE,
+	PATROL,
+	RUN,
 }
 
 var current_state = State.IDLE
@@ -34,28 +33,28 @@ var current_state = State.IDLE
 
 
 func _ready():
-  # TODO: Player node should be defined as global variable
-  # instead of relying on absolute path
-  player = get_node("/root/main/Player")
-  eye.rotation_change.connect(on_eye_rotation_change)
+	# TODO: Player node should be defined as global variable
+	# instead of relying on absolute path
+	player = get_node("/root/main/Player")
+	eye.rotation_change.connect(on_eye_rotation_change)
 
 
 func _process(delta) -> void:
-  match current_state:
-    State.IDLE:
-      pass
-    State.ATTACK:
-      pass
-    State.DEAD:
-      pass
-    State.CHASE:
-      pass
-    State.PATROL:
-      pass
-    State.RUN:
-      pass
+	match current_state:
+		State.IDLE:
+			pass
+		State.ATTACK:
+			pass
+		State.DEAD:
+			pass
+		State.CHASE:
+			pass
+		State.PATROL:
+			pass
+		State.RUN:
+			pass
 
 
 func on_eye_rotation_change(eye_rotation: Vector3) -> void:
-  print("Changed", eye_rotation)
-  turret.set_rotation_target(eye_rotation)
+	print("Changed", eye_rotation)
+	turret.set_rotation_target(eye_rotation)

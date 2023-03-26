@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbfxu3pj1vv6x"]
+[gd_scene load_steps=8 format=3 uid="uid://cbfxu3pj1vv6x"]
 
 [ext_resource type="Script" path="res://src/weapons/bullet.gd" id="1_3vjnu"]
 
@@ -17,9 +17,25 @@ height = 1.0
 radial_segments = 8
 rings = 2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svpje"]
+shading_mode = 0
+albedo_color = Color(1, 0.505882, 0, 1)
+disable_receive_shadows = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3g2nc"]
+material = SubResource("StandardMaterial3D_svpje")
+size = Vector2(0.2, 0.2)
+orientation = 2
+
+[sub_resource type="Curve" id="Curve_51v1u"]
+min_value = 2.13163e-14
+_data = [Vector2(0, 1), 0.0, -0.101283, 0, 0, Vector2(1, 0.022256), -2.31685, 0.0, 0, 0]
+point_count = 2
+
 [node name="Bullet" type="StaticBody3D"]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 4
 script = ExtResource("1_3vjnu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -30,3 +46,16 @@ shape = SubResource("BoxShape3D_pv8wp")
 transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_i8lph")
 mesh = SubResource("CapsuleMesh_a1vfx")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 128
+mesh = SubResource("PlaneMesh_3g2nc")
+spread = 50.0
+gravity = Vector3(2.08165e-12, -9, 2.08165e-12)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+damping_min = 1.0
+damping_max = 2.0
+scale_amount_curve = SubResource("Curve_51v1u")
+hue_variation_min = -0.49
+hue_variation_max = 0.57

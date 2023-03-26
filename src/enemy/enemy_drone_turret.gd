@@ -30,10 +30,17 @@ func _process(delta: float) -> void:
 		State.IDLE:
 			pass
 		State.ATTACK:
-			pass
-
+			update_attack(delta)
 	update_rotation(delta)
 	update_attack(delta)
+
+
+func set_idle_state() -> void:
+	current_state = State.IDLE
+
+
+func set_attack_state() -> void:
+	current_state = State.ATTACK
 
 
 func set_rotation_target(target: Vector3) -> void:
@@ -42,7 +49,7 @@ func set_rotation_target(target: Vector3) -> void:
 
 func update_rotation(delta: float) -> void:
 	var step = clamp(rotation_speed * delta, 0, 1)
-	var yaw =  lerp(rotation.y, rotation_target.y, step)
+	var yaw = lerp(rotation.y, rotation_target.y, step)
 	var pitch = lerp(rotation.x, rotation_target.x, step)
 	var roll = lerp(rotation.z, rotation_target.z, step)
 	rotation = Vector3(pitch, yaw, roll)
@@ -57,6 +64,6 @@ func update_attack(delta: float) -> void:
 		var root = get_tree().get_root()
 		root.add_child(bullet)
 		bullet.global_position = current_spawn.global_position
-		bullet.rotation = rotation
+		bullet.rotation = Vector3(rotation.x, rotation.y + get_parent().rotation.y, rotation.z)
 
 	attack_time += delta
