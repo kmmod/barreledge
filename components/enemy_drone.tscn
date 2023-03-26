@@ -1,10 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://bfqwn0qc1c4nw"]
+[gd_scene load_steps=24 format=3 uid="uid://bfqwn0qc1c4nw"]
 
 [ext_resource type="Script" path="res://src/enemy/enemy_drone.gd" id="1_aq821"]
 [ext_resource type="Texture2D" uid="uid://406y26po00l6" path="res://assets/enemy-drone/enemy-drone_Drone-Turret.png" id="1_fn5sn"]
 [ext_resource type="Texture2D" uid="uid://ckpsdqxkk72pu" path="res://assets/enemy-drone/enemy-drone_Drone-Main.png" id="2_7ckms"]
 [ext_resource type="Texture2D" uid="uid://bdgj1ooqfmxv7" path="res://assets/enemy-drone/Drone-Main-3.png" id="2_m2xas"]
+[ext_resource type="Script" path="res://src/enemy/enemy_drone_turret.gd" id="3_16aat"]
 [ext_resource type="Texture2D" uid="uid://2eid1h3nuewk" path="res://assets/enemy-drone/enemy-drone_Drone-Antenna.png" id="3_p1834"]
+[ext_resource type="PackedScene" uid="uid://cbfxu3pj1vv6x" path="res://components/bullet.tscn" id="4_ip0fl"]
 [ext_resource type="Script" path="res://src/enemy/enemy_drone_eye.gd" id="5_ba7jn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqdgq"]
@@ -190,6 +192,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0608313, -0.801821, 0.4752
 material_override = SubResource("StandardMaterial3D_eqdgq")
 mesh = SubResource("ArrayMesh_30tyu")
 skeleton = NodePath("")
+script = ExtResource("3_16aat")
+bullet_scene = ExtResource("4_ip0fl")
+
+[node name="BulletSpawn1" type="Node3D" parent="Turret"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.06087, -0.178757, 0.408881)
+
+[node name="BulletSpawn2" type="Node3D" parent="Turret"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.06087, -0.405655, 0.182952)
 
 [node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.251155, -1.024)
@@ -213,7 +223,7 @@ skeleton = NodePath("")
 shape = SubResource("SphereShape3D_lrubv")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.387853, 0, -0.921721, 0, 1, 0, 0.921721, 0, 0.387853, -3.49416, 0.00670552, 1.24104)
+transform = Transform3D(0.260505, -4.27605e-16, -0.965473, 3.48787e-16, 1, -3.48787e-16, 0.965473, -2.45884e-16, 0.260505, -4.25479, 0.0184291, 0.942)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.408075, 0.680315, -0.608807, 2.77444e-08, 0.666858, 0.745185, 0.912948, -0.304092, 0.272128, -3.92215, 2.56513, 0)

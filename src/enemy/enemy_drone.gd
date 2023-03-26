@@ -58,4 +58,4 @@ func _process(delta) -> void:
 
 func on_eye_rotation_change(eye_rotation: Vector3) -> void:
   print("Changed", eye_rotation)
-  turret.rotation = eye_rotation
+  turret.set_rotation_target(eye_rotation)

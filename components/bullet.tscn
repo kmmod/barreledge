@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbfxu3pj1vv6x"]
+
+[ext_resource type="Script" path="res://src/weapons/bullet.gd" id="1_3vjnu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pv8wp"]
+size = Vector3(0.2, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8lph"]
+albedo_color = Color(1, 0.6, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission = Color(1, 0.486275, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a1vfx"]
+radius = 0.1
+height = 1.0
+radial_segments = 8
+rings = 2
+
+[node name="Bullet" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_3vjnu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_pv8wp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_i8lph")
+mesh = SubResource("CapsuleMesh_a1vfx")
