@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/weapons/bullet.gd" id="1_3vjnu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pv8wp"]
-size = Vector3(0.2, 0.2, 1)
+size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8lph"]
 albedo_color = Color(1, 0.6, 0, 1)
@@ -12,8 +12,9 @@ emission_enabled = true
 emission = Color(1, 0.486275, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a1vfx"]
-radius = 0.1
-height = 1.0
+custom_aabb = AABB(2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+radius = 0.05
+height = 0.1
 radial_segments = 8
 rings = 2
 
@@ -42,18 +43,39 @@ script = ExtResource("1_3vjnu")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_pv8wp")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_i8lph")
 mesh = SubResource("CapsuleMesh_a1vfx")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="Trail" type="CPUParticles3D" parent="."]
+visible = false
 amount = 128
+lifetime_randomness = 0.25
 mesh = SubResource("PlaneMesh_3g2nc")
 spread = 50.0
 gravity = Vector3(2.08165e-12, -9, 2.08165e-12)
 initial_velocity_min = 1.0
 initial_velocity_max = 2.0
+damping_min = 1.0
+damping_max = 2.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_51v1u")
+hue_variation_min = -0.49
+hue_variation_max = 0.57
+
+[node name="Explosion" type="CPUParticles3D" parent="."]
+visible = false
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("PlaneMesh_3g2nc")
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 50.0
+gravity = Vector3(2.08165e-12, -9, 2.08165e-12)
+initial_velocity_min = 3.0
+initial_velocity_max = 4.0
 damping_min = 1.0
 damping_max = 2.0
 scale_amount_curve = SubResource("Curve_51v1u")

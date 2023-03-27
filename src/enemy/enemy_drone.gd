@@ -37,9 +37,28 @@ func _ready():
 	# instead of relying on absolute path
 	player = get_node("/root/main/Player")
 	eye.rotation_change.connect(on_eye_rotation_change)
+	transition_to_state(State.ATTACK)
 
 
 func _process(delta) -> void:
+	match current_state:
+		State.IDLE:
+			pass
+		State.ATTACK:
+			update_attack_state()
+			pass
+		State.DEAD:
+			pass
+		State.CHASE:
+			pass
+		State.PATROL:
+			pass
+		State.RUN:
+			pass
+
+
+func transition_to_state(new_state):
+	# Exit the current state
 	match current_state:
 		State.IDLE:
 			pass
@@ -54,7 +73,31 @@ func _process(delta) -> void:
 		State.RUN:
 			pass
 
+	# Enter the new state
+	match new_state:
+		State.IDLE:
+			pass
+		State.ATTACK:
+			turret.set_attack_state()
+			pass
+		State.DEAD:
+			pass
+		State.CHASE:
+			pass
+		State.PATROL:
+			pass
+		State.RUN:
+			pass
+
+	# Set the current state to the new state
+	current_state = new_state
+
 
 func on_eye_rotation_change(eye_rotation: Vector3) -> void:
 	print("Changed", eye_rotation)
-	turret.set_rotation_target(eye_rotation)
+	# turret.set_rotation_target(eye_rotation)
+
+
+func update_attack_state() -> void:
+	# direction from drone to player
+	turret.set_rotation_target(player.position)

@@ -71,4 +71,3 @@ func update_eye_rotation(delta: float) -> void:
 	var pitch = lerp(rotation.z, rotation_target.z, step)
 
 	rotation = Vector3(0, yaw, pitch)
-

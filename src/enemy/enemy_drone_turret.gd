@@ -32,7 +32,6 @@ func _process(delta: float) -> void:
 		State.ATTACK:
 			update_attack(delta)
 	update_rotation(delta)
-	update_attack(delta)
 
 
 func set_idle_state() -> void:
@@ -65,5 +64,6 @@ func update_attack(delta: float) -> void:
 		root.add_child(bullet)
 		bullet.global_position = current_spawn.global_position
 		bullet.rotation = Vector3(rotation.x, rotation.y + get_parent().rotation.y, rotation.z)
+		bullet.set_travel_state()
 
 	attack_time += delta
