@@ -48,8 +48,8 @@ func set_rotation_target(target: Vector3) -> void:
 
 func update_rotation(delta: float) -> void:
 	var step = clamp(rotation_speed * delta, 0, 1)
-	var yaw = lerp(rotation.y, rotation_target.y, step)
 	var pitch = lerp(rotation.x, rotation_target.x, step)
+	var yaw = lerp(rotation.y, rotation_target.y, step)
 	var roll = lerp(rotation.z, rotation_target.z, step)
 	rotation = Vector3(pitch, yaw, roll)
 

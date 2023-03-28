@@ -30,6 +30,7 @@ var current_state = State.IDLE
 # Maybe with export node path?
 @onready var eye: MeshInstance3D = $Eye
 @onready var turret: MeshInstance3D = $Turret
+@onready var helper: Node3D = $Helper
 
 
 func _ready():
@@ -76,10 +77,9 @@ func transition_to_state(new_state):
 	# Enter the new state
 	match new_state:
 		State.IDLE:
-			pass
+			turret.set_idle_state()
 		State.ATTACK:
 			turret.set_attack_state()
-			pass
 		State.DEAD:
 			pass
 		State.CHASE:
@@ -100,4 +100,12 @@ func on_eye_rotation_change(eye_rotation: Vector3) -> void:
 
 func update_attack_state() -> void:
 	# direction from drone to player
-	turret.set_rotation_target(player.position)
+	# var forward = global_transform.basis.z
+	var forw = Vector3.FORWARD
+	var dir = position.direction_to(player.position)
+	var rot = Vector3(dir.x, dir.y, dir.z) 
+	helper.rotation = rot
+	# var rot = Vector3(0, dir.y, 0)
+	# var rot = global_transform.looking_at(player.position, Vector3.UP).origin.normalized()
+	print("Direction to player", rot)
+	turret.set_rotation_target(rot)
