@@ -33,6 +33,7 @@ var rotation_speed = 4
 # Maybe with export node path?
 @onready var eye: MeshInstance3D = $Eye
 @onready var turret: MeshInstance3D = $Turret
+@onready var raycast: RayCast3D = $RayCast3D
 
 
 func _ready():
@@ -48,17 +49,17 @@ func _process(delta) -> void:
 		State.IDLE:
 			pass
 		State.ATTACK:
+			update_rotation(delta)
 			update_attack_state()
-			pass
 		State.DEAD:
 			pass
 		State.CHASE:
-			pass
+			update_rotation(delta)
+			update_chase_state(delta)
 		State.PATROL:
 			pass
 		State.RUN:
 			pass
-	update_rotation(delta)
 
 
 func transition_to_state(new_state):
@@ -80,13 +81,16 @@ func transition_to_state(new_state):
 	# Enter the new state
 	match new_state:
 		State.IDLE:
+			eye.set_idle_state()
 			turret.set_idle_state()
 		State.ATTACK:
+			eye.set_follow_state()
 			turret.set_attack_state()
 		State.DEAD:
 			pass
 		State.CHASE:
-			pass
+			eye.set_idle_state()
+			turret.set_idle_state()
 		State.PATROL:
 			pass
 		State.RUN:
@@ -97,8 +101,7 @@ func transition_to_state(new_state):
 
 
 func on_eye_rotation_change(eye_rotation: Vector3) -> void:
-	print("Changed", eye_rotation)
-	# turret.set_rotation_target(eye_rotation)
+	turret.set_rotation_target(eye_rotation)
 
 
 func update_rotation(delta: float) -> void:
@@ -106,15 +109,60 @@ func update_rotation(delta: float) -> void:
 	rotation.y = lerp_angle(rotation.y, rotation_target.y, step)
 
 
+func is_player_in_range(max_range: float) -> bool:
+	var player_pos = player.position + Vector3(0, 1.5, 0)
+	var distance = position.distance_to(player_pos)
+	return distance < max_range
+
+
+func update_idle_state() -> void:
+	if is_player_in_range(detection_range):
+		transition_to_state(State.CHASE)
+
+
+func update_patrol_state() -> void:
+	pass
+
+
+func update_chase_state(delta: float) -> void:
+	var target_pos = Vector3(player.position.x, position.y, player.position.z)
+	raycast.target_position = target_pos
+	if raycast.is_colliding():
+		print("Player is not visible")
+
+	velocity = (target_pos - position).normalized() * speed * delta
+	move_and_slide()
+
+	if is_player_in_range(attack_range):
+		transition_to_state(State.ATTACK)
+
+
+
+func update_run_state() -> void:
+	pass
+
+
+func update_dead_state() -> void:
+	pass
+
+
 func update_attack_state() -> void:
-	var player_pos = player.position + Vector3(0, 1.7, 0)
+	var player_pos = player.position + Vector3(0, 1.5, 0)
 	var drone_direction = position.direction_to(player_pos)
-	var yaw = atan2(drone_direction.x, drone_direction.z)
-	rotation_target = Vector3(0, yaw + PI / 2, 0)
-	
-	var xz_distance = position.distance_to(Vector3(player_pos.x, position.y, player_pos.z))
-	var y_distance = position.y - player_pos.y
+	var drone_yaw = atan2(drone_direction.x, drone_direction.z)
+	rotation_target = Vector3(0, drone_yaw + PI / 2, 0)
+
+	var turret_pos = position + turret.position
+
+	var xz_distance = turret_pos.distance_to(Vector3(player_pos.x, turret_pos.y, player_pos.z))
+	var y_distance = turret_pos.y - player_pos.y
 	var pitch = atan2(y_distance, xz_distance)
 
 	var turret_target = Vector3(0, 0, pitch)
 	turret.set_rotation_target(turret_target)
+
+	var eye_target = Vector3(0, 0, pitch)
+	eye.set_rotation_target(eye_target)
+
+	if not is_player_in_range(attack_range):
+		transition_to_state(State.CHASE)

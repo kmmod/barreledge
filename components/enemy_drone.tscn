@@ -111,6 +111,8 @@ cull_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_p1834")
 roughness = 0.5
+emission_enabled = true
+emission_texture = ExtResource("3_p1834")
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_nly7m"]
@@ -222,3 +224,5 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_lrubv")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]

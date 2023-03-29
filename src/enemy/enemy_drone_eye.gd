@@ -30,13 +30,19 @@ func _process(delta: float) -> void:
 	update_eye_rotation(delta)
 
 
-func set_follow_state(target: Vector3) -> void:
-	follow_target = target
+func set_follow_state() -> void:
 	transition_to_state(State.FOLLOW)
 
 
 func set_idle_state() -> void:
 	transition_to_state(State.IDLE)
+
+
+func set_rotation_target(target: Vector3) -> void:
+	var rad_limit = deg_to_rad(angle_limit)
+	var yaw_target = clamp(target.y, -rad_limit, rad_limit)
+	var pitch_target = clamp(target.z, -rad_limit, rad_limit)
+	rotation_target = Vector3(0, yaw_target, pitch_target)
 
 
 func transition_to_state(new_state) -> void:
@@ -62,7 +68,7 @@ func update_idle_state(delta: float) -> void:
 
 
 func update_follow_state() -> void:
-	rotation_target = Vector3(0, 0, 0)
+	pass
 
 
 func update_eye_rotation(delta: float) -> void:
